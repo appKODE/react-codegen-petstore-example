@@ -198,22 +198,20 @@ Error generating stack: `+i.message+`
   color: ${({theme:e})=>e.palette.primary.dark};
   background-color: ${({theme:e})=>e.palette.primary.light};
 
-  &::before {
-    display: block;
-    position: absolute;
-    content: '';
-    background-color: ${({theme:e})=>e.palette.primary.light};
-    width: 100%;
-    height: 100%;
-  }
   &::after {
-    display: block;
-    padding: 16px;
     position: absolute;
-    content: 'Failed to load image ' attr(alt);
+    content: 'Failed to load image for ' attr(alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     width: 100%;
-    top: 50%;
-    transform: translateY(-50%);
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background-color: ${({theme:e})=>e.palette.primary.light};
   }
 `,WR=({id:e,name:t,photoURL:n,category:r,status:o,tags:i,isDeleting:s,onDelete:a})=>Se(Qc,{sx:{maxWidth:345},children:[R(VR,{component:"img",height:"180",image:n,alt:t}),Se(qc,{children:[Se(et,{variant:"overline",color:"text.secondary",children:["ID: ",e]}),R(et,{gutterBottom:!0,variant:"h5",children:t}),Se(et,{variant:"body1",color:"text.secondary",children:['Category: "',r,'", Status: "',o,'"']}),i.length>0?Se(et,{variant:"subtitle2",color:"text.disabled",children:["Tags: ",i.join(", ")]}):null]}),R(i2,{children:R(jR,{loading:s,onClick:a,color:"error",size:"large",variant:"contained",disableElevation:!0,children:"Delete pet"})})]}),HR=({isFetchingDeletion:e,petDetails:t,isOpen:n,onClose:r,onDeletePet:o})=>t?R(dp,{isOpen:n,maxWidth:420,onClose:r,children:R(WR,{...t,onDelete:()=>{o(t.id)},isDeleting:e})}):R(dp,{isOpen:n,maxWidth:420,onClose:r,children:R(Qc,{elevation:0,variant:"outlined",children:R(qc,{children:R(et,{children:"No info"})})})}),QR=()=>Ix(t=>f0.deletePet({petId:t})),qR=({id:e,pets:t})=>{var s,a,l,u,d,c,f;if(!e||!t||t.length===0)return;const n=t.find(g=>g.id===e);if(!n)return;const r=(a=(s=n.tags)==null?void 0:s.reduce((g,v)=>(v.name&&g.push(v.name),g),[]))!=null?a:[],o=(l=n.photoUrls)==null?void 0:l.find(g=>{try{return new URL(g),!0}catch{return!1}});return{id:(u=n.id)!=null?u:0,name:n.name,photoURL:o,category:(c=(d=n.category)==null?void 0:d.name)!=null?c:"N/A",status:(f=n.status)!=null?f:"N/A",tags:r}},KR=()=>{var y;const[e,t]=w.exports.useState(),[n,r]=w.exports.useState(!1),o=$c(),{data:i,isLoading:s,isError:a}=bR("available"),{mutateAsync:l,isLoading:u}=QR(),d=(y=TR(i==null?void 0:i.data))!=null?y:[],c=qR({id:e,pets:i==null?void 0:i.data});return Se(Q1,{children:[R(HR,{isOpen:n,petDetails:c,onClose:()=>{r(!1)},onDeletePet:()=>{e&&l(e,{onSettled:()=>{r(!1),o.invalidateQueries(Zc.list())}})},isFetchingDeletion:u}),R(NR,{items:d,isLoading:s,hasError:a,onClick:S=>{t(S),r(!0)}})]})},GR=()=>R(RP,{petListSlot:R(KR,{})}),XR=new xx,YR=()=>R(kx,{client:XR,children:R(EP,{children:R(K1,{children:R(GR,{})})})});vl.createRoot(document.getElementById("root")).render(R(w.exports.StrictMode,{children:R(YR,{})}));
